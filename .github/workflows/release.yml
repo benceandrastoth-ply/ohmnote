@@ -54,7 +54,7 @@ jobs:
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 21 }
-      - uses: android-actions/setup-android@v3
+      # GitHub's Ubuntu machines already have the Android SDK ($ANDROID_HOME); Gradle fetches any missing platform.
       - run: npm ci
       # The signing key lives in repository secrets, never in the code. Without it the build is
       # debug-signed (still installable, but updates need the same key, so add the secrets early).
