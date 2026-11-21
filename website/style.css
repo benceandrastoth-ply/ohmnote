@@ -59,6 +59,7 @@ h3 { margin: 14px 0 6px; font-size: 19px; }
 .dl-head svg { width: 26px; height: 26px; fill: var(--text); flex: none; }
 .dl h3 { margin: 0; }
 .dl p { margin: 0; }
+.dl code { white-space: pre-wrap; word-break: break-all; }
 .dl .btn { justify-content: center; }
 code { font: 13px var(--mono); background: #0b0d10; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: #c9e7d6; overflow-x: auto; display: block; white-space: nowrap; }
 pre code { white-space: pre; padding: 16px 18px; line-height: 1.6; }
