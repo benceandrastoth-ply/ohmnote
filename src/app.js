@@ -918,7 +918,12 @@ function cancelDrag() {
 function touchDown(e) {
   if (e.pointerType === 'pen') S.stylus = true;
   if (e.pointerType !== 'touch') return false;
+  // A first finger means no other finger is down. Forget any finger whose lift we never heard
+  // (e.g. a pinch that ended over the tool bar); otherwise every new touch looks like a pinch and
+  // nothing gets drawn.
+  if (e.isPrimary) { touches.clear(); pinch = null; }
   touches.set(e.pointerId, touchPoint(e));
+  try { vp.setPointerCapture(e.pointerId); } catch { /* finger already gone */ }
   if (touches.size === 2) {
     cancelDrag();
     if (S.draft) { S.draft = null; renderPreview(); }
@@ -1175,6 +1180,10 @@ function endDrag() {
 }
 vp.addEventListener('pointerup', (e) => { if (!touchUp(e)) endDrag(); });
 vp.addEventListener('pointercancel', (e) => { touchUp(e); endDrag(); });
+// a finger lifted anywhere in the app (tool bar, panels) still counts as lifted
+for (const t of ['pointerup', 'pointercancel']) {
+  window.addEventListener(t, (e) => { if (e.pointerType === 'touch' && touches.has(e.pointerId) && !vp.contains(e.target)) touchUp(e); }, true);
+}
 vp.addEventListener('pointerleave', () => { S.cursorScreen = null; if (!S.drag) renderPreview(); });
 
 vp.addEventListener('dblclick', (e) => {
