@@ -27,6 +27,8 @@ All files are on the [Releases](https://github.com/benceandrastoth-ply/ohmnote/r
 - **Calculator, formulas and rules** (`K`): `4k7 || 10k`, `R1 + R2`, Ohm's law, dividers, RC, resonance, 555, op-amps, and a cheat sheet of the basic rules.
 - **Your own handwriting as a font**, joined-up cursive (folyóírás) included, with three versions of every letter.
 - **Notebook photos → digital book.** Pages are found, straightened and cleaned like a scanner, on your device.
+  Or let OhmNote rewrite and redraw them: writing it can read becomes typed text (English and Hungarian),
+  everything else is traced into pen strokes you can edit.
 - **Read as a book** with designed covers and curling page turns, and save it as a PDF.
 - **Accounts and sync.** Sign in and your projects, scanned pages, fonts and settings follow you between Windows, Linux and Android.
 - **80 settings and 12 presets** (notebook, squared paper, blueprint, chalkboard…), English and Hungarian.
@@ -72,7 +74,7 @@ Leave `src/cloud-config.js` empty to build OhmNote without accounts.
 | `main.js`, `preload.js` | Electron (Windows / Linux): window, files, dialogs |
 | `src/platform.js` | The same API on Android and in a browser (IndexedDB, share sheet) |
 | `src/app.js` | Canvas, tools, parts, wires, projects, inspector |
-| `src/settings.js`, `props.js`, `calc.js`, `fontmaker.js`, `scan.js`, `book.js`, `cloud.js` | Settings, part properties, calculator, handwriting fonts, notebook scans, book view, accounts |
+| `src/settings.js`, `props.js`, `calc.js`, `fontmaker.js`, `scan.js`, `redraw.js`, `book.js`, `cloud.js` | Settings, part properties, calculator, handwriting fonts, notebook scans, rewriting and redrawing scans, book view, accounts |
 | `android/` | Capacitor Android project |
 | `website/` | The download site |
 

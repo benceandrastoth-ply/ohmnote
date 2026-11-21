@@ -4,7 +4,7 @@
 // it a page of a project. Everything runs locally.
 'use strict';
 
-const SC = { photos: [], cur: 0, mode: 'scan', strength: 50, target: 'new', name: '', busy: false };
+const SC = { photos: [], cur: 0, mode: 'scan', strength: 50, target: 'new', name: '', busy: false, content: 'photo', readText: true };
 const SCT = {
   title: ['Notebook photos → book', 'Füzetfotókból könyv'], name: ['Book name', 'Könyv neve'],
   choose: ['Choose photos…', 'Fotók kiválasztása…'], drop: ['or drop photos of your notebook pages here', 'vagy húzd ide a füzetoldalakról készült fotókat'],
@@ -28,6 +28,21 @@ const SCT = {
   pages: ['pages', 'oldal'], working: ['Working on page', 'Oldal feldolgozása:'], done: ['Book ready', 'Kész a könyv'], added: ['Pages added', 'Oldalak hozzáadva'],
   bad: ['Could not read', 'Nem sikerült beolvasni:'], page: ['Page', 'Oldal'], defName: ['Notebook', 'Füzet'],
   discard: ['Close and drop these photos?', 'Bezárod, és elveted ezeket a fotókat?'],
+  content: ['Each page becomes', 'Az oldalakból ez lesz'],
+  cPhoto: ['The photo', 'A fotó'], cRedraw: ['Rewritten & redrawn', 'Újraírva, újrarajzolva'], cBoth: ['Both', 'Mindkettő'],
+  contentHint: {
+    photo: ['The cleaned-up photo of the page.', 'Az oldal megtisztított fotója.'],
+    redraw: ['OhmNote tries to rewrite the page: writing it can read becomes typed text, everything else (drawings, circuits, writing it can’t read) is traced into pen strokes you can edit. Check the result: it’s a best try.',
+      'Az OhmNote megpróbálja újraírni az oldalt: amit el tud olvasni, gépelt szöveg lesz, minden mást (rajzok, kapcsolások, olvashatatlan írás) szerkeszthető tollvonásokká rajzol át. Nézd át az eredményt: ez csak egy próbálkozás.'],
+    both: ['The rewritten and redrawn page on top of the photo, so you can compare, then delete either.', 'Az újraírt, újrarajzolt oldal a fotó fölött: összehasonlíthatod, aztán bármelyiket törölheted.'],
+  },
+  readText: ['Turn writing into text', 'Az írás szöveggé alakítása'],
+  readOff: ['Off: everything is redrawn as pen strokes, nothing is read.', 'Kikapcsolva minden tollvonás lesz, semmit sem olvas el.'],
+  sens: ['Ink sensitivity', 'Tintaérzékenység'],
+  reading: ['Reading the page…', 'Az oldal olvasása…'], tracing: ['Tracing the drawings…', 'A rajzok átrajzolása…'],
+  legend: ['Highlighted = read as text', 'Kiemelve = szövegként olvasva'],
+  readingN: ['Reading page', 'Oldal olvasása:'],
+  readFail: ['The writing could not be read this time, so everything was redrawn as pen strokes.', 'Az írást most nem sikerült elolvasni, ezért minden tollvonásként lett újrarajzolva.'],
 };
 
 // ---------------------------------------------------------------- image helpers
@@ -301,8 +316,11 @@ function openScan() {
     <input type="file" id="sc-file" accept="image/*" multiple hidden>`;
   m.classList.remove('hidden');
   m.onclick = scClick;
-  m.oninput = (e) => { if (e.target.id === 'sc-name') SC.name = e.target.value; if (e.target.dataset.scstr !== undefined) { SC.strength = +e.target.value; scPreviewSoon(); } };
-  m.onchange = (e) => { if (e.target.id === 'sc-file') { scAdd([...e.target.files]); e.target.value = ''; } };
+  m.oninput = (e) => { if (e.target.id === 'sc-name') SC.name = e.target.value; if (e.target.dataset.scstr !== undefined) { SC.strength = +e.target.value; scPreviewSoon(SC.content === 'photo' ? 150 : 600); } };
+  m.onchange = (e) => {
+    if (e.target.id === 'sc-file') { scAdd([...e.target.files]); e.target.value = ''; }
+    if (e.target.dataset.sctext !== undefined) { SC.readText = e.target.checked; scRender(); }
+  };
   m.ondragover = (e) => { if (e.dataTransfer.types.includes('Files')) e.preventDefault(); };
   m.ondrop = (e) => { e.preventDefault(); scAdd([...e.dataTransfer.files].filter((f) => f.type.startsWith('image/'))); };
   scRender();
@@ -346,6 +364,7 @@ function scRender() {
   }
   const ph = SC.photos[SC.cur];
   const modes = [['scan', SCT.mScan], ['ink', SCT.mInk], ['bw', SCT.mBw], ['color', SCT.mColor], ['orig', SCT.mOrig]];
+  const contents = [['photo', SCT.cPhoto], ['redraw', SCT.cRedraw], ['both', SCT.cBoth]];
   main.innerHTML = `
     <div class="sc-strip">
       ${SC.photos.map((p, i) => `<button class="sc-thumb ${i === SC.cur ? 'on' : ''}" data-scpick="${i}"><img src="${p.thumb}" alt=""><span>${i + 1}</span></button>`).join('')}
@@ -364,10 +383,16 @@ function scRender() {
     <div class="sc-side">
       <p class="insp-h">${L2(SCT.result)} · ${SC.cur + 1} / ${n}</p>
       <div class="sc-result"><canvas id="sc-out"></canvas></div>
-      <p class="insp-h" style="margin-top:14px">${L2(SCT.cleanup)}</p>
+      <p class="sc-note muted small"></p>
+      <p class="insp-h" style="margin-top:14px">${L2(SCT.content)}</p>
+      <div class="seg wrap">${contents.map(([k, l]) => `<button data-sccontent="${k}" class="${SC.content === k ? 'on' : ''}">${L2(l)}</button>`).join('')}</div>
+      <p class="muted small">${L2(SCT.contentHint[SC.content])}</p>
+      ${SC.content === 'photo' ? '' : `<label class="sc-check"><input type="checkbox" data-sctext ${SC.readText ? 'checked' : ''}> ${L2(SCT.readText)}</label>
+      ${SC.readText ? '' : `<p class="muted small">${L2(SCT.readOff)}</p>`}`}
+      ${SC.content === 'redraw' ? '' : `<p class="insp-h" style="margin-top:14px">${L2(SCT.cleanup)}</p>
       <div class="seg wrap">${modes.map(([k, l]) => `<button data-scmode="${k}" class="${SC.mode === k ? 'on' : ''}">${L2(l)}</button>`).join('')}</div>
-      <p class="muted small">${L2(SCT.modeHint[SC.mode])}</p>
-      ${SC.mode === 'orig' ? '' : `<label class="fm-opt"><span>${L2(SCT.strength)}</span><div class="rng"><input type="range" min="0" max="100" step="5" value="${SC.strength}" data-scstr></div></label>`}
+      <p class="muted small">${L2(SCT.modeHint[SC.mode])}</p>`}
+      ${SC.mode === 'orig' && SC.content !== 'redraw' ? '' : `<label class="fm-opt"><span>${L2(SC.content === 'redraw' ? SCT.sens : SCT.strength)}</span><div class="rng"><input type="range" min="0" max="100" step="5" value="${SC.strength}" data-scstr></div></label>`}
       <p class="insp-h" style="margin-top:14px">${L2(SCT.into)}</p>
       <div class="seg"><button data-sctarget="new" class="${SC.target === 'new' ? 'on' : ''}">${L2(SCT.newBook)}</button><button data-sctarget="here" class="${SC.target === 'here' ? 'on' : ''}">${L2(SCT.addTo)}</button></div>
     </div>`;
@@ -418,6 +443,8 @@ function scPreviewSoon(ms = 150) {
   scPrevTimer = setTimeout(() => {
     const ph = SC.photos[SC.cur], out = $('#sc-out');
     if (!ph || !out) return;
+    if (SC.content !== 'photo') { scPreviewRedraw(ph, out); return; }
+    $('.sc-note').textContent = '';
     const c = scProcess(ph.view, ph, 900);
     const box = $('.sc-result').getBoundingClientRect();
     const k = Math.min((box.width || 280) / c.width, 420 / c.height);
@@ -429,10 +456,36 @@ function scPreviewSoon(ms = 150) {
   }, ms);
 }
 
+// The redraw preview reads the page (a second or two), so only the latest request draws.
+let scPrevToken = 0;
+async function scPreviewRedraw(ph, out) {
+  const token = ++scPrevToken;
+  const note = $('.sc-note');
+  note.textContent = SC.readText ? L2(SCT.reading) : L2(SCT.tracing);
+  out.classList.add('busy');
+  try {
+    const ink = scClean(scWarp(ph.view, ph.corners, 1100), 'ink', SC.strength);
+    const res = await redrawPage(ink, 800, { readText: SC.readText });
+    if (token !== scPrevToken || !$('#sc-out')) return;
+    const box = $('.sc-result').getBoundingClientRect();
+    const k = Math.min((box.width || 280) / ink.width, 420 / ink.height);
+    out.width = Math.round(ink.width * k); out.height = Math.round(ink.height * k);
+    out.classList.remove('ink');
+    redrawPreview(out, res, 800);
+    note.textContent = res.readFailed ? L2(SCT.readFail) : SC.readText && res.texts.length ? L2(SCT.legend) : '';
+  } catch (err) {
+    if (token === scPrevToken && $('.sc-note')) $('.sc-note').textContent = String(err.message || err);
+  } finally {
+    if (token === scPrevToken && $('#sc-out')) $('#sc-out').classList.remove('busy');
+  }
+}
+
 async function scClick(e) {
   const t = e.target;
   const pk = t.closest('[data-scpick]');
   if (pk) { SC.cur = +pk.dataset.scpick; scRender(); return; }
+  const ct = t.closest('[data-sccontent]');
+  if (ct) { SC.content = ct.dataset.sccontent; scRender(); return; }
   const md = t.closest('[data-scmode]');
   if (md) { SC.mode = md.dataset.scmode; scRender(); return; }
   const tg = t.closest('[data-sctarget]');
@@ -471,6 +524,7 @@ async function scCreate() {
   const proj = isNew ? newProject((SC.name || '').trim() || L2(SCT.defName)) : S.project;
   if (isNew) proj.pages = [];
   const first = proj.pages.length;
+  let readFailed = false;
   const r = vp.getBoundingClientRect();
   try {
     for (let i = 0; i < SC.photos.length; i++) {
@@ -480,13 +534,27 @@ async function scCreate() {
       const full = await scLoad(ph.file, 2800);
       const src = scRotated(full, ph.rot);
       full.close();
-      const c = scProcess(src, ph, 2000);
-      const url = c.toDataURL('image/webp', 0.86);
-      const name = await api.saveAsset(proj.id, uid(), url);
-      ASSETS.set(`${proj.id}/${name}`, url);
       const pg = newPage(`${L2(SCT.page)} ${first + i + 1}`);
-      const w = 800, h = Math.round((800 * c.height) / c.width);
-      pg.images.push({ id: uid(), asset: name, x: 0, y: 0, w, h });
+      const w = 800;
+      let h = 0;
+      if (SC.content !== 'redraw') {
+        const c = scProcess(src, ph, 2000);
+        const url = c.toDataURL('image/webp', 0.86);
+        const name = await api.saveAsset(proj.id, uid(), url);
+        ASSETS.set(`${proj.id}/${name}`, url);
+        h = Math.round((800 * c.height) / c.width);
+        pg.images.push({ id: uid(), asset: name, x: 0, y: 0, w, h });
+      }
+      if (SC.content !== 'photo') {
+        status.textContent = `${L2(SC.readText ? SCT.readingN : SCT.working)} ${i + 1} / ${SC.photos.length}…`;
+        await frames(1);
+        const ink = scClean(scWarp(src, ph.corners, 1600), 'ink', SC.strength);
+        const res = await redrawPage(ink, w, { readText: SC.readText });
+        if (res.readFailed) readFailed = true;
+        pg.strokes.push(...res.strokes);
+        pg.texts.push(...res.texts);
+        h = h || Math.round((w * ink.height) / ink.width);
+      }
       const z = Math.min((r.width - 60) / w, (r.height - 60) / h, 1.5);
       pg.view = { x: (r.width - w * z) / 2, y: 30, z };
       proj.pages.push(pg);
@@ -505,11 +573,13 @@ async function scCreate() {
     await refreshProjects();
     await openProject(proj.id);
     toast(L2(SCT.done));
+    if (readFailed) toast(L2(SCT.readFail), true);
     openBook(); // starts closed, on the cover
   } else {
     scheduleSave();
     renderProjects();
     switchPage(firstId);
     toast(L2(SCT.added));
+    if (readFailed) toast(L2(SCT.readFail), true);
   }
 }

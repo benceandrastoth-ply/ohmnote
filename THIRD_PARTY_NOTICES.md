@@ -8,6 +8,8 @@ OhmNote ships with these libraries. Thank you to their authors.
 | [Capacitor](https://capacitorjs.com/) (core, android, filesystem, share) | Android app | MIT |
 | [opentype.js](https://github.com/opentypejs/opentype.js) (`src/vendor/opentype.min.js`) | Writing handwriting fonts | MIT (`src/vendor/opentype.LICENSE`) |
 | [Clipper](http://www.angusj.com/delphi/clipper.php) by Angus Johnson, JavaScript port `clipper-lib` (`src/vendor/clipper.js`) | Merging pen strokes into clean letter outlines | Boost Software License 1.0 |
+| [Tesseract.js](https://github.com/naptha/tesseract.js) and tesseract.js-core (`src/vendor/tesseract/`) | Reading handwriting in notebook photos | Apache-2.0 (`src/vendor/tesseract/LICENSE-*.txt`) |
+| [Tesseract](https://github.com/tesseract-ocr/tesseract) English and Hungarian trained data (`src/vendor/tesseract/lang/`, from `@tesseract.js-data`, tessdata 4.0.0_best_int) | Reading handwriting in notebook photos | Apache-2.0 |
 | [supabase-js](https://github.com/supabase/supabase-js) (`src/vendor/supabase.js`) | Accounts and sync | MIT (`src/vendor/supabase.LICENSE`) |
 
 ## Boost Software License 1.0 (Clipper)
