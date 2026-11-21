@@ -835,6 +835,11 @@ body.splitting, body.splitting * { cursor: col-resize !important; user-select: n
   #topbar { padding: env(safe-area-inset-top) 8px 0; gap: 6px; overflow-x: auto; scrollbar-width: none; }
   #topbar::-webkit-scrollbar { display: none; }
   .brand span, .group.zoom, #btn-zoom-label, .group button.labeled span { display: none; }
+  /* only the everyday buttons stay in the top bar; the rest are in the ⋯ menu */
+  .brand, #btn-bom, #btn-book, #btn-export, #btn-lang, #btn-theme { display: none !important; }
+  #topbar { justify-content: space-between; }
+  #topbar .spacer { display: none; }
+  .menu .mi { padding: 10px 12px; }
   .group button { --ctl: 38px; }
   /* tools live in a bar at the bottom */
   #tools { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; justify-content: space-around; border-radius: 0; border: 0; border-top: 1px solid var(--border);

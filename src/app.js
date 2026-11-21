@@ -2347,6 +2347,23 @@ $('#btn-settings').addEventListener('click', () => {
 });
 $('#btn-right').addEventListener('click', toggleRight);
 $('#btn-menu').addEventListener('click', () => toggleDrawer('left'));
+// phones: buttons that do not fit in the top bar live in this menu
+$('#btn-more').addEventListener('click', (e) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  showMenu(r.right - 240, r.bottom + 6, [
+    { label: tr('top.bomTitle').replace(/\s*\([^)]*\)$/, ''), action: openBom },
+    { label: L2(BKT.read), action: () => openBook() },
+    '-',
+    { label: tr('menu.exportPng'), action: exportPng },
+    { label: L2(BKT.pdf), action: bookPdf },
+    { label: tr('menu.projectFile'), action: exportProject },
+    { label: L2(BKT.scan), action: openScan },
+    { label: tr('menu.import'), action: importProject },
+    '-',
+    { label: tr('top.theme'), action: () => $('#btn-theme').click() },
+    ...Object.entries(LANGS).map(([code, label]) => ({ label: `${code === LANG ? '✓ ' : '\u2003'}${label}`, action: () => setLang(code) })),
+  ]);
+});
 $('#btn-calc').addEventListener('click', () => openCalc());
 $('#btn-account').addEventListener('click', () => openAccount());
 $('#btn-book').addEventListener('click', () => openBook());

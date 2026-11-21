@@ -28,7 +28,7 @@ const STR = {
     'top.bom': 'BOM', 'top.bomTitle': 'Parts list / BOM (B)',
     'top.export': 'Export', 'top.settings': 'Settings (Ctrl+,)', 'top.theme': 'Light / dark', 'top.right': 'Toggle side panel (])', 'top.lang': 'Language',
     // left panel
-    'left.projects': 'Projects', 'left.import': 'Import a .ohm project', 'left.scan': 'Notebook photos → book', 'top.book': 'Read as book', 'top.menu': 'Projects and parts', 'top.account': 'Account and sync', 'left.newProject': 'New project (Ctrl+Shift+N)',
+    'left.projects': 'Projects', 'left.import': 'Import a .ohm project', 'left.scan': 'Notebook photos → book', 'top.book': 'Read as book', 'top.menu': 'Projects and parts', 'top.account': 'Account and sync', 'top.more': 'More', 'left.newProject': 'New project (Ctrl+Shift+N)',
     'left.components': 'Components', 'left.search': 'Search parts…', 'lib.none': 'No parts match',
     'proj.actions': 'Project actions', 'page.actions': 'Page actions', 'page.add': '+ Add page (Ctrl+N)',
     // right panel
@@ -123,7 +123,7 @@ const STR = {
     'top.zoomOut': 'Kicsinyítés (-)', 'top.zoomReset': 'Vissza 100%-ra', 'top.zoomIn': 'Nagyítás (+)', 'top.fit': 'Oldal igazítása a képernyőhöz (0)',
     'top.bom': 'Lista', 'top.bomTitle': 'Alkatrészlista / BOM (B)',
     'top.export': 'Exportálás', 'top.settings': 'Beállítások (Ctrl+,)', 'top.theme': 'Világos / sötét', 'top.right': 'Oldalpanel ki/be (])', 'top.lang': 'Nyelv',
-    'left.projects': 'Projektek', 'left.import': '.ohm projekt importálása', 'left.scan': 'Füzetfotókból könyv', 'top.book': 'Olvasás könyvként', 'top.menu': 'Projektek és alkatrészek', 'top.account': 'Fiók és szinkron', 'left.newProject': 'Új projekt (Ctrl+Shift+N)',
+    'left.projects': 'Projektek', 'left.import': '.ohm projekt importálása', 'left.scan': 'Füzetfotókból könyv', 'top.book': 'Olvasás könyvként', 'top.menu': 'Projektek és alkatrészek', 'top.account': 'Fiók és szinkron', 'top.more': 'Továbbiak', 'left.newProject': 'Új projekt (Ctrl+Shift+N)',
     'left.components': 'Alkatrészek', 'left.search': 'Alkatrész keresése…', 'lib.none': 'Nincs találat',
     'proj.actions': 'Projektműveletek', 'page.actions': 'Oldalműveletek', 'page.add': '+ Új oldal (Ctrl+N)',
     'tab.inspector': 'Tulajdonságok', 'tab.notes': 'Jegyzetek', 'tab.calc': 'Számolás', 'top.calc': 'Számológép, képletek és szabályok (K)', 'sc.calc': 'Számológép',

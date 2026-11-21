@@ -7,7 +7,17 @@
   if (window.ohm) return; // desktop app: the real file system is used
 
   const Cap = window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform() ? window.Capacitor : null;
-  const native = (name) => (Cap ? Cap.registerPlugin(name) : null);
+  // Native plugins are exposed by Capacitor's Android bridge as Capacitor.Plugins.<Name>
+  // (registerPlugin only exists when @capacitor/core's JavaScript is bundled, which OhmNote does not do).
+  // Never let a missing plugin stop the app: without it, files are simply downloaded instead of shared.
+  const native = (name) => {
+    try {
+      if (!Cap) return null;
+      if (Cap.Plugins && Cap.Plugins[name]) return Cap.Plugins[name];
+      if (typeof Cap.registerPlugin === 'function') return Cap.registerPlugin(name);
+    } catch (err) { console.warn(`Capacitor plugin ${name} unavailable`, err); }
+    return null;
+  };
   const Filesystem = native('Filesystem');
   const Share = native('Share');
 

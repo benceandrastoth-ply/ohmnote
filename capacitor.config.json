@@ -4,10 +4,14 @@
   "webDir": "src",
   "android": {
     "allowMixedContent": false,
-    "captureInput": true,
-    "webContentsDebuggingEnabled": false
+    "captureInput": true
   },
   "plugins": {
-    "SplashScreen": { "launchShowDuration": 0 }
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },
+    "SystemBars": {
+      "insetsHandling": "native"
+    }
   }
 }
