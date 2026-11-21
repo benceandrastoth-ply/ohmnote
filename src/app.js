@@ -474,7 +474,7 @@ function renderTexts() {
     else el.style.removeProperty('--d');
     el.classList.toggle('sel', S.sel.has(t.id) && S.editing !== t.id);
     const body = el.firstChild;
-    body.style.fontSize = t.z && t.z !== 1 ? `calc(var(--text-size) * ${t.z})` : '';
+    if (S.editing !== t.id) body.style.fontSize = t.z && t.z !== 1 ? `calc(var(--text-size) * ${t.z})` : ''; // never touch the box being typed in
     if (S.editing !== t.id && body.innerHTML !== t.html) body.innerHTML = t.html;
   }
   for (const el of [...layer.children]) if (!seen.has(el.dataset.id)) el.remove();

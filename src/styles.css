@@ -898,3 +898,7 @@ body.splitting, body.splitting * { cursor: col-resize !important; user-select: n
 #btn-account .acct-dot.error { background: var(--danger); color: #fff; }
 @keyframes acct-pulse { 50% { opacity: .5; } }
 #st-cloud.err { color: var(--danger); }
+
+/* Android keyboards must be able to read the text they type: a user-select: none ancestor makes them
+   type the previous word again. Everything you can type into stays selectable. */
+input, textarea, [contenteditable="true"], [contenteditable="true"] * { -webkit-user-select: text; user-select: text; }
