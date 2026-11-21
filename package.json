@@ -1,7 +1,7 @@
 {
   "name": "ohmnote",
   "productName": "OhmNote",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A notebook for electronics: schematics, sketches and notes on the same page.",
   "main": "main.js",
   "author": {

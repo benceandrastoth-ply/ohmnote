@@ -1397,11 +1397,26 @@ function scaleSelection(k) {
   mutate(() => applyScale(d, k));
 }
 
+// The eraser covers the whole path since the last pointer event, with a small radius: a quick swipe
+// gives samples several pixels apart, which would otherwise jump right over a thin pen line.
+const ERASE_R = 6;
+const ERASE_RING = [[0, 0], [ERASE_R, 0], [-ERASE_R, 0], [0, ERASE_R], [0, -ERASE_R]];
 function eraseAt(e) {
   const ids = new Set();
-  for (const el of document.elementsFromPoint(e.clientX, e.clientY)) {
-    const g = el.closest('.stroke, .shape');
-    if (g && g.dataset.id) ids.add(g.dataset.id);
+  const d = S.drag;
+  const to = { x: e.clientX, y: e.clientY };
+  const from = d && d.last ? d.last : to;
+  if (d) d.last = to;
+  const steps = Math.max(1, Math.ceil(Math.hypot(to.x - from.x, to.y - from.y) / 3));
+  for (let i = 0; i <= steps; i++) {
+    const x = from.x + ((to.x - from.x) * i) / steps;
+    const y = from.y + ((to.y - from.y) * i) / steps;
+    for (const [ox, oy] of ERASE_RING) {
+      for (const el of document.elementsFromPoint(x + ox, y + oy)) {
+        const g = el.closest('.stroke, .shape');
+        if (g && g.dataset.id) ids.add(g.dataset.id);
+      }
+    }
   }
   if (!ids.size) return;
   const pg = page();
