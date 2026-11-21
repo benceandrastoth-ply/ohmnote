@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#16191e">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co">
+  <title>OhmNote</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark" data-tool="select">
+
+<header id="topbar">
+  <button id="btn-menu" class="phone-only" data-i18n-title="top.menu"><svg viewBox="0 0 20 20"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <div class="brand">
+    <svg viewBox="0 0 28 28" class="logo" aria-hidden="true">
+      <rect x="1" y="1" width="26" height="26" rx="7"/>
+      <path d="M4 14h4l2-5 3 10 3-10 3 10 2-5h3"/>
+    </svg>
+    <span>OhmNote</span>
+  </div>
+
+  <div class="group" id="tools">
+    <button data-tool="select" data-i18n-title="tool.select">
+      <svg viewBox="0 0 20 20"><path d="M5 3l10 6.2-4.6 1.4 2.6 5.2-2 1-2.6-5.3L5 15z"/></svg></button>
+    <button data-tool="hand" data-i18n-title="tool.hand">
+      <svg viewBox="0 0 20 20"><path d="M10 2v16M2 10h16M10 2 7.5 4.5M10 2l2.5 2.5M10 18l-2.5-2.5M10 18l2.5-2.5M2 10l2.5-2.5M2 10l2.5 2.5M18 10l-2.5-2.5M18 10l-2.5 2.5"/></svg></button>
+    <span class="sep"></span>
+    <button data-tool="wire" data-i18n-title="tool.wire">
+      <svg viewBox="0 0 20 20"><path d="M3.5 15.5H9V5h7.5"/><circle cx="3.5" cy="15.5" r="1.6" class="dot"/><circle cx="16.5" cy="5" r="1.6" class="dot"/></svg></button>
+    <button data-tool="pen" data-i18n-title="tool.pen">
+      <svg viewBox="0 0 20 20"><path d="M4 16l1-4 8.5-8.5a2.1 2.1 0 013 3L8 15z M12 5l3 3"/></svg></button>
+    <button data-tool="shape" data-i18n-title="tool.shape">
+      <svg viewBox="0 0 20 20"><rect x="2.5" y="3" width="9" height="9" rx="1"/><circle cx="13" cy="13" r="4.5"/></svg></button>
+    <button data-tool="text" data-i18n-title="tool.text">
+      <svg viewBox="0 0 20 20"><path d="M4 5V3.5h12V5M10 3.5v13M7.5 16.5h5"/></svg></button>
+    <button data-tool="eraser" data-i18n-title="tool.eraser">
+      <svg viewBox="0 0 20 20"><path d="M8 16.5h9M3.6 12.4l7.6-7.6a1.5 1.5 0 012.1 0l2.9 2.9a1.5 1.5 0 010 2.1L10 16.5H7.7z M7 9l4.5 4.5"/></svg></button>
+  </div>
+
+  <div class="group" id="tool-options"></div>
+
+  <div class="group hidden" id="fmt">
+    <button data-cmd="bold" data-i18n-title="fmt.bold"><b>B</b></button>
+    <button data-cmd="italic" data-i18n-title="fmt.italic"><i>I</i></button>
+    <button data-cmd="underline" data-i18n-title="fmt.underline"><u>U</u></button>
+    <button data-cmd="strikeThrough" data-i18n-title="fmt.strike"><s>S</s></button>
+    <span class="sep"></span>
+    <button data-cmd="formatBlock" data-val="h1" data-i18n-title="fmt.h1" class="txt">H1</button>
+    <button data-cmd="formatBlock" data-val="h2" data-i18n-title="fmt.h2" class="txt">H2</button>
+    <button data-cmd="formatBlock" data-val="p" data-i18n-title="fmt.p" class="txt">¶</button>
+    <button data-cmd="insertUnorderedList" data-i18n-title="fmt.ul">
+      <svg viewBox="0 0 20 20"><path d="M8 5h9M8 10h9M8 15h9"/><circle cx="4" cy="5" r="1.2" class="dot"/><circle cx="4" cy="10" r="1.2" class="dot"/><circle cx="4" cy="15" r="1.2" class="dot"/></svg></button>
+    <button data-cmd="insertOrderedList" data-i18n-title="fmt.ol" class="txt">1.</button>
+    <button data-cmd="code" data-i18n-title="fmt.code" class="txt mono">&lt;/&gt;</button>
+    <button data-cmd="formatBlock" data-val="pre" data-i18n-title="fmt.pre" class="txt mono">{ }</button>
+    <span class="sep"></span>
+    <button data-cmd="foreColor" data-val="#e5484d" class="sw" data-i18n-title="fmt.red"><i style="background:#e5484d"></i></button>
+    <button data-cmd="foreColor" data-val="#f5a524" class="sw" data-i18n-title="fmt.amber"><i style="background:#f5a524"></i></button>
+    <button data-cmd="foreColor" data-val="#30a46c" class="sw" data-i18n-title="fmt.green"><i style="background:#30a46c"></i></button>
+    <button data-cmd="foreColor" data-val="#3e8ef7" class="sw" data-i18n-title="fmt.blue"><i style="background:#3e8ef7"></i></button>
+    <button data-cmd="hiliteColor" data-val="rgba(245,165,36,.35)" data-i18n-title="fmt.hl" class="txt"><span class="hl">ab</span></button>
+    <button data-cmd="removeFormat" data-i18n-title="fmt.clear" class="txt">T̸</button>
+    <span class="sep"></span>
+    <button data-cmd="chars" data-i18n-title="fmt.chars" class="txt">Ω</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="group">
+    <button id="btn-undo" data-i18n-title="top.undo"><svg viewBox="0 0 20 20"><path d="M7 7.5h6.5a4 4 0 010 8H9M7 7.5l3-3M7 7.5l3 3"/></svg></button>
+    <button id="btn-redo" data-i18n-title="top.redo"><svg viewBox="0 0 20 20"><path d="M13 7.5H6.5a4 4 0 000 8H11M13 7.5l-3-3M13 7.5l-3 3"/></svg></button>
+  </div>
+  <div class="group zoom">
+    <button id="btn-zoom-out" data-i18n-title="top.zoomOut">−</button>
+    <button id="btn-zoom-label" data-i18n-title="top.zoomReset" class="txt mono">100%</button>
+    <button id="btn-zoom-in" data-i18n-title="top.zoomIn">+</button>
+    <button id="btn-fit" data-i18n-title="top.fit"><svg viewBox="0 0 20 20"><path d="M3 7V3h4M13 3h4v4M17 13v4h-4M7 17H3v-4"/></svg></button>
+  </div>
+  <div class="group">
+    <button id="btn-bom" class="labeled" data-i18n-title="top.bomTitle"><svg viewBox="0 0 20 20"><path d="M7 5h10M7 10h10M7 15h10M3 5h1M3 10h1M3 15h1"/></svg><span data-i18n="top.bom">BOM</span></button>
+    <button id="btn-book" data-i18n-title="top.book"><svg viewBox="0 0 20 20"><path d="M10 5.5C8 4 5.5 3.6 2.5 4v11c3-.4 5.5 0 7.5 1.5 2-1.5 4.5-1.9 7.5-1.5V4c-3-.4-5.5 0-7.5 1.5zM10 5.5v11"/></svg></button>
+    <button id="btn-calc" data-i18n-title="top.calc"><svg viewBox="0 0 20 20"><rect x="4" y="2.5" width="12" height="15" rx="2"/><path d="M6.5 5.5h7v3h-7z"/><circle cx="7.5" cy="11.5" r=".9" class="dot"/><circle cx="10" cy="11.5" r=".9" class="dot"/><circle cx="12.5" cy="11.5" r=".9" class="dot"/><circle cx="7.5" cy="14.5" r=".9" class="dot"/><circle cx="10" cy="14.5" r=".9" class="dot"/><circle cx="12.5" cy="14.5" r=".9" class="dot"/></svg></button>
+    <button id="btn-export" class="labeled" data-i18n-title="top.export"><svg viewBox="0 0 20 20"><path d="M10 3v10M6 7l4-4 4 4M3.5 12v4.5h13V12"/></svg><span data-i18n="top.export">Export</span></button>
+    <button id="btn-lang" class="txt mono" data-i18n-title="top.lang">EN</button>
+    <button id="btn-account" data-i18n-title="top.account"></button>
+    <button id="btn-settings" data-i18n-title="top.settings"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.6"/><path d="M10 2v2.5M10 15.5V18M2 10h2.5M15.5 10H18M4.3 4.3l1.8 1.8M13.9 13.9l1.8 1.8M4.3 15.7l1.8-1.8M13.9 6.1l1.8-1.8"/></svg></button>
+    <button id="btn-theme" data-i18n-title="top.theme"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5"/><path d="M10 3.5a6.5 6.5 0 000 13z" class="dot"/></svg></button>
+    <button id="btn-right" data-i18n-title="top.right"><svg viewBox="0 0 20 20"><rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M12.5 3.5v13"/></svg></button>
+  </div>
+</header>
+
+<aside id="left">
+  <div class="splitter" data-split="left"></div>
+  <section id="projects-sec">
+    <div class="sec-head">
+      <span data-i18n="left.projects">Projects</span>
+      <button id="btn-scan" data-i18n-title="left.scan"><svg viewBox="0 0 20 20"><path d="M3 6.5h3l1.5-2h5L14 6.5h3v9H3z"/><circle cx="10" cy="11" r="3"/></svg></button>
+      <button id="btn-import" data-i18n-title="left.import"><svg viewBox="0 0 20 20"><path d="M10 13V3M6 9l4 4 4-4M3.5 12v4.5h13V12"/></svg></button>
+      <button id="btn-new-project" data-i18n-title="left.newProject"><svg viewBox="0 0 20 20"><path d="M10 4v12M4 10h12"/></svg></button>
+    </div>
+    <div id="project-list"></div>
+  </section>
+  <section id="lib-sec">
+    <div class="sec-head"><span data-i18n="left.components">Components</span></div>
+    <div class="search-wrap">
+      <input id="lib-search" type="search" data-i18n-ph="left.search" placeholder="Search parts…" spellcheck="false">
+      <kbd>/</kbd>
+    </div>
+    <div id="lib"></div>
+  </section>
+</aside>
+
+<main id="viewport">
+  <div id="paper-deco"></div>
+  <div id="world">
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg">
+      <g id="g-images"></g>
+      <g id="g-shapes"></g>
+      <g id="g-wires"></g>
+      <g id="g-comps"></g>
+      <g id="g-junc"></g>
+      <g id="g-strokes"></g>
+      <g id="g-sel"></g>
+      <g id="g-preview"></g>
+    </svg>
+    <div id="texts"></div>
+  </div>
+  <div id="marquee" class="hidden"></div>
+  <div id="hint"></div>
+  <div id="toast" class="hidden"></div>
+</main>
+
+<aside id="right">
+  <div class="splitter" data-split="right"></div>
+  <div class="tabs">
+    <button data-tab="inspector" class="on" data-i18n="tab.inspector">Inspector</button>
+    <button data-tab="notes" data-i18n="tab.notes">Page notes</button>
+    <button data-tab="calc" data-i18n="tab.calc">Calc</button>
+  </div>
+  <div id="inspector" class="tabpane on"></div>
+  <div id="calc-pane" class="tabpane"></div>
+  <div id="notes-pane" class="tabpane">
+    <div id="notes" class="rich" contenteditable="true" spellcheck="true"
+         data-i18n-ph="notes.placeholder"></div>
+  </div>
+</aside>
+
+<footer id="statusbar">
+  <span id="st-page"></span>
+  <span id="st-count"></span>
+  <span class="spacer"></span>
+  <span id="st-pos" class="mono"></span>
+  <span id="st-cloud"></span>
+  <span id="st-save"></span>
+</footer>
+
+<svg id="fx" width="0" height="0" aria-hidden="true">
+  <filter id="f-wobble" filterUnits="userSpaceOnUse" x="-2000" y="-2000" width="4000" height="4000">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/>
+    <feDisplacementMap id="f-wobble-map" in="SourceGraphic" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="f-pencil" filterUnits="userSpaceOnUse" x="-2000" y="-2000" width="4000" height="4000">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="3" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feComponentTransfer in="n" result="g"><feFuncA type="linear" slope="2.2" intercept="-0.25"/></feComponentTransfer>
+    <feComposite in="d" in2="g" operator="in"/>
+  </filter>
+  <filter id="f-prev-wobble">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="4"/>
+    <feDisplacementMap in="SourceGraphic" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div id="menu" class="menu hidden"></div>
+<div id="modal" class="modal hidden"></div>
+
+<script src="platform.js"></script>
+<script src="symbols.js"></script>
+<script src="i18n.js"></script>
+<script src="settings.js"></script>
+<script src="props.js"></script>
+<script src="vendor/opentype.min.js"></script>
+<script src="vendor/clipper.js"></script>
+<script src="fontmaker.js"></script>
+<script src="app.js"></script>
+<script src="calc.js"></script>
+<script src="scan.js"></script>
+<script src="book.js"></script>
+<script src="vendor/supabase.js"></script>
+<script src="cloud-config.js"></script>
+<script src="cloud.js"></script>
+</body>
+</html>

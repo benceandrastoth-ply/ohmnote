@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OhmNote · a notebook for electronics</title>
+  <meta name="description" content="Free, open-source notebook for electronics: schematics, sketches, handwriting and notes on the same page. Windows, Linux and Android.">
+  <meta property="og:title" content="OhmNote · a notebook for electronics">
+  <meta property="og:description" content="Schematics, sketches, handwriting and notes on the same page. Free and open source.">
+  <meta property="og:image" content="img/notebook.png">
+  <link rel="icon" href="img/icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#top"><img src="img/icon.png" alt=""><span>OhmNote</span></a>
+  <nav>
+    <a href="#features" data-en="Features" data-hu="Funkciók">Features</a>
+    <a href="#download" data-en="Download" data-hu="Letöltés">Download</a>
+    <a href="#source" data-en="Open source" data-hu="Nyílt forrás">Open source</a>
+    <a class="gh" href="https://github.com/benceandrastoth-ply/ohmnote" aria-label="GitHub">
+      <svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 00-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.83-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 008 0z"/></svg></a>
+    <button id="lang" class="lang" aria-label="Language">HU</button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="kicker" data-en="Free · open source · Windows, Linux, Android" data-hu="Ingyenes · nyílt forrású · Windows, Linux, Android">Free · open source · Windows, Linux, Android</p>
+      <h1 data-en="A notebook for electronics." data-hu="Füzet elektronikához.">A notebook for electronics.</h1>
+      <p class="lead" data-en="Draw the schematic, sketch the breadboard, write down what you measured: all on the same page. Then flip through it like a real book."
+         data-hu="Rajzold le a kapcsolást, vázold fel a próbapanelt, írd le, mit mértél: mind egy oldalon. Aztán lapozd át, mint egy igazi könyvet.">
+        Draw the schematic, sketch the breadboard, write down what you measured: all on the same page. Then flip through it like a real book.</p>
+      <div class="cta">
+        <a class="btn primary" id="hero-dl" href="#download"><span data-en="Download" data-hu="Letöltés">Download</span> <small id="hero-os"></small></a>
+        <a class="btn" href="https://github.com/benceandrastoth-ply/ohmnote" data-en="View the source" data-hu="Forráskód">View the source</a>
+      </div>
+      <p class="version muted" id="version"></p>
+    </div>
+    <div class="hero-shot"><img src="img/notebook.png" alt="OhmNote with the notebook preset: ruled paper, a schematic and handwritten notes"></div>
+  </section>
+
+  <section id="features" class="features">
+    <h2 data-en="Everything on one page" data-hu="Minden egy oldalon">Everything on one page</h2>
+    <div class="grid">
+      <article><img src="img/parts.png" alt="" loading="lazy">
+        <h3 data-en="Real schematics" data-hu="Valódi kapcsolási rajzok">Real schematics</h3>
+        <p data-en="45+ parts, wires that snap to pins and follow parts, and real properties: ohms, tolerance, voltage, colour bands, an LED resistor calculator and a parts list."
+           data-hu="45+ alkatrész, lábakra illeszkedő vezetékek, és valódi tulajdonságok: ohm, tűrés, feszültség, színgyűrűk, LED-ellenállás kalkulátor és alkatrészlista.">45+ parts, wires that snap to pins and follow parts, and real properties: ohms, tolerance, voltage, colour bands, an LED resistor calculator and a parts list.</p></article>
+      <article><img src="img/handwriting.png" alt="" loading="lazy">
+        <h3 data-en="Your own handwriting" data-hu="A saját kézírásod">Your own handwriting</h3>
+        <p data-en="Write the alphabet once and OhmNote turns it into a real font, joined-up cursive (folyóírás) included, with three versions of every letter so it never looks stamped."
+           data-hu="Írd le egyszer az ábécét, és az OhmNote valódi betűtípust készít belőle, folyóírással együtt, minden betűből három változattal, hogy ne legyen gépies.">Write the alphabet once and OhmNote turns it into a real font, joined-up cursive (folyóírás) included, with three versions of every letter so it never looks stamped.</p></article>
+      <article><img src="img/scan.png" alt="" loading="lazy">
+        <h3 data-en="Photos → digital book" data-hu="Fotókból digitális könyv">Photos → digital book</h3>
+        <p data-en="Photograph your paper notebook. Pages are found, straightened and cleaned like a scanner, shadows and printed lines removed, all on your device."
+           data-hu="Fotózd le a papírfüzeted. Az oldalakat megtalálja, kiegyenesíti és szkennerként megtisztítja, eltünteti az árnyékot és a nyomtatott vonalakat, mindezt az eszközödön.">Photograph your paper notebook. Pages are found, straightened and cleaned like a scanner, shadows and printed lines removed, all on your device.</p></article>
+      <article><img src="img/book-turn.png" alt="" loading="lazy">
+        <h3 data-en="Read it like a book" data-hu="Olvasd, mint egy könyvet">Read it like a book</h3>
+        <p data-en="Leather, cloth, school-book or circuit-board covers, pages that curl as you turn them, and one-click PDF."
+           data-hu="Bőr, vászon, iskolai füzet vagy nyák borító, lapozáskor hajló lapok és PDF egy kattintással.">Leather, cloth, school-book or circuit-board covers, pages that curl as you turn them, and one-click PDF.</p></article>
+      <article><img src="img/calculator.png" alt="" loading="lazy">
+        <h3 data-en="Calculator and formulas" data-hu="Számológép és képletek">Calculator and formulas</h3>
+        <p data-en="Type 4k7 || 10k or R1 + R2. Ohm's law, dividers, RC, resonance, 555, op-amps, and a cheat sheet of the basic rules."
+           data-hu="Írd be: 4k7 || 10k vagy R1 + R2. Ohm-törvény, osztók, RC, rezonancia, 555, műveleti erősítők és az alapszabályok puskája.">Type 4k7 || 10k or R1 + R2. Ohm's law, dividers, RC, resonance, 555, op-amps, and a cheat sheet of the basic rules.</p></article>
+      <article><img src="img/presets.png" alt="" loading="lazy">
+        <h3 data-en="Make it yours" data-hu="Legyen a tiéd">Make it yours</h3>
+        <p data-en="Notebook, squared paper, blueprint, chalkboard, terminal… 80 settings, fountain pen and pencil nibs, write-in animation, English and Hungarian."
+           data-hu="Füzet, kockás papír, tervrajz, iskolai tábla, terminál… 80 beállítás, töltőtoll és ceruza, „megírás” animáció, angolul és magyarul.">Notebook, squared paper, blueprint, chalkboard, terminal… 80 settings, fountain pen and pencil nibs, write-in animation, English and Hungarian.</p></article>
+    </div>
+    <div class="split">
+      <div><img src="img/android.png" alt="OhmNote on a phone" class="phone" loading="lazy"></div>
+      <div>
+        <h2 data-en="On your phone too" data-hu="A telefonodon is">On your phone too</h2>
+        <p data-en="The Android app has a touch layout: tools at the bottom, panels that slide in, pinch to zoom, and palm rejection when you write with a stylus. Sign in and your notebook syncs between all your devices."
+           data-hu="Az androidos alkalmazás érintésre készült: eszközök alul, becsúszó panelek, csippentős nagyítás és tenyérfelismerés érintőtollas íráskor. Jelentkezz be, és a füzeted minden eszközödön szinkronban lesz.">The Android app has a touch layout: tools at the bottom, panels that slide in, pinch to zoom, and palm rejection when you write with a stylus. Sign in and your notebook syncs between all your devices.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="download">
+    <h2 data-en="Download" data-hu="Letöltés">Download</h2>
+    <p class="muted" id="dl-note" data-en="Free, no ads, no tracking. Pick your system:" data-hu="Ingyenes, reklám és követés nélkül. Válaszd ki a rendszered:">Free, no ads, no tracking. Pick your system:</p>
+    <div class="dl-grid">
+      <div class="dl" data-os="windows">
+        <div class="dl-head"><svg viewBox="0 0 24 24"><path d="M3 5.5l7.5-1v7H3zm0 13l7.5 1v-7H3zm8.5 1.2L21 21v-8.5h-9.5zm0-15.4v7.2H21V3z"/></svg><h3>Windows</h3></div>
+        <p class="muted" data-en="Windows 10 and 11, 64-bit" data-hu="Windows 10 és 11, 64 bites">Windows 10 and 11, 64-bit</p>
+        <a class="btn primary" data-asset="Setup" href="#"><span data-en="Installer (.exe)" data-hu="Telepítő (.exe)">Installer (.exe)</span></a>
+        <a class="btn" data-asset="portable" href="#"><span data-en="Portable, no install" data-hu="Hordozható, telepítés nélkül">Portable, no install</span></a>
+      </div>
+      <div class="dl" data-os="debian">
+        <div class="dl-head"><svg viewBox="0 0 24 24"><path d="M13.6 2.1a8.6 8.6 0 00-8.3 13.5c1.6 2.6 4.6 4.1 7.6 3.6a6.4 6.4 0 01-5.6-6.6 5 5 0 018.6-3.3 3.6 3.6 0 01-2.8 5.6 2 2 0 01-1.9-2.4 1.4 1.4 0 012 .9 2.3 2.3 0 001-4.3 3.5 3.5 0 00-4.4 4.1 4.3 4.3 0 007.3 2.1A6.5 6.5 0 0013.6 2.1z"/></svg><h3>Debian · Ubuntu · Mint</h3></div>
+        <p class="muted">.deb · x86_64</p>
+        <a class="btn primary" data-asset=".deb" href="#"><span data-en="Download .deb" data-hu=".deb letöltése">Download .deb</span></a>
+        <code>sudo apt install ./ohmnote_*_amd64.deb</code>
+      </div>
+      <div class="dl" data-os="fedora">
+        <div class="dl-head"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-10 10v8.1A1.9 1.9 0 003.9 22H12a10 10 0 000-20zm2.8 6.4h-1.6v1.7h1.6a1.5 1.5 0 010 3h-1.6v1.6a3.6 3.6 0 01-3.6 3.6 3.5 3.5 0 01-1.2-.2 1.5 1.5 0 01.5-2.9 2.2 2.2 0 00.7.1.6.6 0 00.6-.6v-1.6H8.6a1.5 1.5 0 010-3h1.6V8.4a3.6 3.6 0 013.6-3.6h1a1.5 1.5 0 010 3z"/></svg><h3>Fedora · openSUSE</h3></div>
+        <p class="muted">.rpm · x86_64</p>
+        <a class="btn primary" data-asset=".rpm" href="#"><span data-en="Download .rpm" data-hu=".rpm letöltése">Download .rpm</span></a>
+        <code>sudo dnf install ./ohmnote-*.x86_64.rpm</code>
+      </div>
+      <div class="dl" data-os="arch">
+        <div class="dl-head"><svg viewBox="0 0 24 24"><path d="M12 2c-.9 2.2-1.4 3.6-2.4 5.7.6.6 1.4 1.4 2.6 2.3-1.3-.5-2.2-1.1-2.9-1.7C7.9 11.4 5.9 15.2 2 22c3-1.7 5.4-2.8 7.6-3.2a5.6 5.6 0 01-.1-1.3v-.1c.1-2 1.2-3.6 2.4-3.5s2.1 1.8 2.1 3.8a6 6 0 01-.1 1.1c2.2.4 4.5 1.5 7.4 3.2l-1.5-2.8a12 12 0 00-2.6-1.9 6.3 6.3 0 012 .7C16.4 11.3 15 7.5 12 2z"/></svg><h3>Arch · Manjaro · EndeavourOS</h3></div>
+        <p class="muted">pacman · x86_64</p>
+        <a class="btn primary" data-asset=".pkg.tar.zst" href="#"><span data-en="Download package" data-hu="Csomag letöltése">Download package</span></a>
+        <code>sudo pacman -U ./ohmnote-*-x86_64.pkg.tar.zst</code>
+      </div>
+      <div class="dl" data-os="linux">
+        <div class="dl-head"><svg viewBox="0 0 24 24"><path d="M12 2c-2 0-3 1.8-3 4 0 1.5.3 2.2-.6 3.6C7 11.8 5.5 14 6 16.3c-.9.5-2.2 1.1-2 2.2.2.9 1.6.8 2.6 1.4 1.2.8 2.3 1.8 3.4.9.6-.5 1.4-.6 2-.6s1.4.1 2 .6c1.1.9 2.2-.1 3.4-.9 1-.6 2.4-.5 2.6-1.4.2-1.1-1.1-1.7-2-2.2.5-2.3-1-4.5-2.4-6.7-.9-1.4-.6-2.1-.6-3.6 0-2.2-1-4-3-4z"/></svg><h3 data-en="Any Linux" data-hu="Bármely Linux">Any Linux</h3></div>
+        <p class="muted">AppImage · x86_64</p>
+        <a class="btn primary" data-asset=".AppImage" href="#"><span data-en="Download AppImage" data-hu="AppImage letöltése">Download AppImage</span></a>
+        <code>chmod +x OhmNote-*.AppImage && ./OhmNote-*.AppImage</code>
+      </div>
+      <div class="dl" data-os="android">
+        <div class="dl-head"><svg viewBox="0 0 24 24"><path d="M6.8 9h10.4v8.2a1.3 1.3 0 01-1.3 1.3h-.9V21a1.2 1.2 0 01-2.4 0v-2.5h-1.2V21a1.2 1.2 0 01-2.4 0v-2.5h-.9a1.3 1.3 0 01-1.3-1.3zM4.6 9a1.2 1.2 0 011.2 1.2v5a1.2 1.2 0 01-2.4 0v-5A1.2 1.2 0 014.6 9zm14.8 0a1.2 1.2 0 011.2 1.2v5a1.2 1.2 0 01-2.4 0v-5A1.2 1.2 0 0119.4 9zM15.3 3.3l1-1.5a.2.2 0 00-.3-.2l-1 1.6a6.2 6.2 0 00-6 0l-1-1.6a.2.2 0 00-.3.2l1 1.5A5.3 5.3 0 006.8 8h10.4a5.3 5.3 0 00-1.9-4.7zM9.5 6.2a.6.6 0 11.6-.6.6.6 0 01-.6.6zm5 0a.6.6 0 11.6-.6.6.6 0 01-.6.6z"/></svg><h3>Android</h3></div>
+        <p class="muted" data-en="Android 7 or newer · phones and tablets" data-hu="Android 7 vagy újabb · telefon és táblagép">Android 7 or newer · phones and tablets</p>
+        <a class="btn primary" data-asset=".apk" href="#"><span data-en="Download APK" data-hu="APK letöltése">Download APK</span></a>
+        <p class="tiny muted" data-en="Open the file on your phone and allow installing from your browser when Android asks." data-hu="Nyisd meg a fájlt a telefonodon, és engedélyezd a telepítést a böngészőből, ha az Android rákérdez.">Open the file on your phone and allow installing from your browser when Android asks.</p>
+      </div>
+    </div>
+    <p class="muted center"><a href="https://github.com/benceandrastoth-ply/ohmnote/releases" data-en="All releases and older versions →" data-hu="Minden kiadás és régebbi verzió →">All releases and older versions →</a></p>
+  </section>
+
+  <section id="source" class="source">
+    <h2 data-en="Open source" data-hu="Nyílt forrás">Open source</h2>
+    <p data-en="OhmNote is free software under the MIT licence. Read the code, report a bug, suggest a part for the library, or build it yourself:"
+       data-hu="Az OhmNote szabad szoftver MIT licenc alatt. Olvasd el a kódot, jelents hibát, javasolj alkatrészt a könyvtárba, vagy fordítsd le magad:">OhmNote is free software under the MIT licence. Read the code, report a bug, suggest a part for the library, or build it yourself:</p>
+    <pre><code>git clone https://github.com/benceandrastoth-ply/ohmnote.git
+cd ohmnote
+npm install
+npm start            # run it
+npm run dist         # Windows installer
+npm run dist:linux   # .deb .rpm pacman AppImage
+npm run android:debug</code></pre>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/benceandrastoth-ply/ohmnote" data-en="GitHub repository" data-hu="GitHub tároló">GitHub repository</a>
+      <a class="btn" href="https://github.com/benceandrastoth-ply/ohmnote/issues" data-en="Report a bug" data-hu="Hibajelentés">Report a bug</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>OhmNote · MIT</span>
+  <span class="muted" data-en="Made for people who build things." data-hu="Azoknak, akik szeretnek alkotni.">Made for people who build things.</span>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>

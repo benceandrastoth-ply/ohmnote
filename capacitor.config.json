@@ -1,0 +1,13 @@
+{
+  "appId": "app.ohmnote",
+  "appName": "OhmNote",
+  "webDir": "src",
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 0 }
+  }
+}
